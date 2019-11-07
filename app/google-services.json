@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "330273460320",
+    "firebase_url": "https://shoppingcomplex-3d4ed.firebaseio.com",
+    "project_id": "shoppingcomplex-3d4ed",
+    "storage_bucket": "shoppingcomplex-3d4ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330273460320:android:1dd5002c54bb8938cab305",
+        "android_client_info": {
+          "package_name": "com.example.shoppingcomplex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330273460320-kl5orjsi13kcmth5nhne84u45aetha3j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shoppingcomplex",
+            "certificate_hash": "ff233e24cf2efbd07cb6c607f005b4eca8977e66"
+          }
+        },
+        {
+          "client_id": "330273460320-ga9lfm458dddf06883h3sr6rc3nddlrb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5qZ5fzuG9O1Lqx3NutlHornkgyytp8tI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "330273460320-ga9lfm458dddf06883h3sr6rc3nddlrb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
