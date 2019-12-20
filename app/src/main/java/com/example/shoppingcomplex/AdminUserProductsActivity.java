@@ -38,13 +38,13 @@ public class AdminUserProductsActivity extends AppCompatActivity
         layoutManager=new LinearLayoutManager(this);
         productsList.setLayoutManager(layoutManager);
 
-        cartListRef= FirebaseDatabase.getInstance().getReference()
-                .child("Cart List").child("Admin View").child(userID).child("Products");
+       cartListRef=FirebaseDatabase.getInstance().getReference()
+               .child("Cart List").child("Admin View").child(userID).child("Products");
+
     }
 
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
 
         FirebaseRecyclerOptions<Cart> options=
@@ -52,13 +52,14 @@ public class AdminUserProductsActivity extends AppCompatActivity
                 .setQuery(cartListRef,Cart.class)
                 .build();
 
-        FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter=new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
+        FirebaseRecyclerAdapter<Cart, CartViewHolder>adapter=new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull CartViewHolder cartViewHolder, int i, @NonNull Cart cart)
+            protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull Cart model)
             {
-                cartViewHolder.txtProductQuantity.setText("Quantity = "+cart.getQuantity());
-                cartViewHolder.txtProductPrice.setText("Price = "+cart.getPrice());
-                cartViewHolder.txtProductName.setText(cart.getPname());
+                holder.txtProductQuantity.setText("Quantity = "+model.getQuantity());
+                holder.txtProductPrice.setText("Price = "+model.getPrice()+" ");
+                holder.txtProductName.setText(model.getPname());
+
             }
 
             @NonNull
@@ -66,11 +67,11 @@ public class AdminUserProductsActivity extends AppCompatActivity
             public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
             {
                 View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items_layout,parent,false);
-                CartViewHolder cartViewHolder=new CartViewHolder(view);
-                return cartViewHolder;
+                CartViewHolder holder=new CartViewHolder(view);
+                return holder;
+
             }
         };
-
         productsList.setAdapter(adapter);
         adapter.startListening();
     }

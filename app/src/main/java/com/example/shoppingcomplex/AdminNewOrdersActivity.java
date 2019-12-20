@@ -36,73 +36,76 @@ public class AdminNewOrdersActivity extends AppCompatActivity
 
         ordersList=findViewById(R.id.orders_list);
         ordersList.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
 
-        FirebaseRecyclerOptions<AdminOrders>options=
+        FirebaseRecyclerOptions<AdminOrders> options=
                 new FirebaseRecyclerOptions.Builder<AdminOrders>()
                 .setQuery(ordersRef,AdminOrders.class)
                 .build();
 
-        FirebaseRecyclerAdapter<AdminOrders,AdminOrdersViewHolder>adapter=
+        final FirebaseRecyclerAdapter<AdminOrders,AdminOrdersViewHolder>adapter=
                 new FirebaseRecyclerAdapter<AdminOrders, AdminOrdersViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull AdminOrdersViewHolder adminOrdersViewHolder, final int i, @NonNull final AdminOrders adminOrders)
+                    protected void onBindViewHolder(@NonNull AdminOrdersViewHolder holder,final int position, @NonNull final AdminOrders model)
                     {
-                        adminOrdersViewHolder.userName.setText("Name: "+adminOrders.getName());
-                        adminOrdersViewHolder.userPhoneNumber.setText("Phone: "+adminOrders.getPhone());
-                        adminOrdersViewHolder.userTotalPrice.setText("Total Amount="+adminOrders.getTotalAmount());
-                        adminOrdersViewHolder.userDateTime.setText("Order at: "+adminOrders.getDate()+" "+adminOrders.getTime());
-                        adminOrdersViewHolder.userShippingAddress.setText("Shipping Address: "+adminOrders.getAddress()+adminOrders.getCity());
+                        holder.userName.setText("Name: "+ model.getName());
+                        holder.userPhoneNumber.setText("Phone: "+ model.getPhone());
+                        holder.userTotalPrice.setText("Total Amount= :"+ model.getTotalAmount());
+                        holder.userDateTime.setText("order at: "+ model.getDate()+" "+model.getTime());
+                        holder.userShippingAddress.setText("Shipping Address: "+ model.getAddress());
 
-                        adminOrdersViewHolder.ShowOrdersBtn.setOnClickListener(new View.OnClickListener() {
+                        holder.ShowOrderBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view)
                             {
-                                String uID= getRef(i).getKey();
 
+                                String uID=getRef(position).getKey();
                                 Intent intent=new Intent(AdminNewOrdersActivity.this,AdminUserProductsActivity.class);
-                                intent.putExtra("uid", uID);
+                                intent.putExtra("uid",uID);
                                 startActivity(intent);
+
                             }
                         });
-
-                        adminOrdersViewHolder.itemView.setOnClickListener(new View.OnClickListener()
-                        {
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view)
                             {
-                                 CharSequence options[]=new CharSequence[]
-                                         {
-                                                 "Yes",
-                                                 "No"
-                                         };
-                                AlertDialog.Builder builder=new AlertDialog.Builder(AdminNewOrdersActivity.this);
-                                builder.setTitle("Have you shipped this order products?");
-
-                                builder.setItems(options, new DialogInterface.OnClickListener()
-                                {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which)
-                                    {
-                                        if(which==0)
+                                CharSequence options[]=new CharSequence[]
                                         {
-                                            String uID= getRef(i).getKey();
-                                            RemoverOrder(uID);
+                                                "Yes",
+                                                "No"
+                                        };
+                                AlertDialog.Builder builder=new AlertDialog.Builder(AdminNewOrdersActivity.this);
+                                builder.setTitle("Have you shipped this order products ?");
+
+                                builder.setItems(options, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int i)
+                                    {
+                                        if(i==0)
+                                        {
+                                            String uID=getRef(position).getKey();
+                                            RemoveOrder(uID);
+
                                         }
                                         else
                                         {
                                             finish();
                                         }
+
                                     }
                                 });
                                 builder.show();
+
                             }
                         });
+
+
 
 
                     }
@@ -111,13 +114,16 @@ public class AdminNewOrdersActivity extends AppCompatActivity
                     @Override
                     public AdminOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
                     {
-                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_layout,parent,false);
-                        return new AdminOrdersViewHolder(view);
+                                View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_layout,parent,false);
+                                return new AdminOrdersViewHolder(view) ;
                     }
-                };
 
+
+
+                };
         ordersList.setAdapter(adapter);
         adapter.startListening();
+
     }
 
 
@@ -125,24 +131,20 @@ public class AdminNewOrdersActivity extends AppCompatActivity
     public static class AdminOrdersViewHolder extends RecyclerView.ViewHolder
     {
         public TextView userName,userPhoneNumber,userTotalPrice,userDateTime,userShippingAddress;
-        public Button ShowOrdersBtn;
+        public Button ShowOrderBtn;
 
-
-        public AdminOrdersViewHolder(View itemView)
-        {
+        public AdminOrdersViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            userName=itemView.findViewById(R.id.order_user_name);
-            userPhoneNumber=itemView.findViewById(R.id.order_phone_number);
-            userTotalPrice=itemView.findViewById(R.id.order_total_price);
-            userDateTime=itemView.findViewById(R.id.order_date_time);
-            userShippingAddress=itemView.findViewById(R.id.order_address_city);
-            ShowOrdersBtn=itemView.findViewById(R.id.show_all_products_btn);
-
+            userName= itemView.findViewById(R.id.order_user_name);
+            userPhoneNumber= itemView.findViewById(R.id.order_phone_number);
+            userTotalPrice= itemView.findViewById(R.id.order_total_price);
+            userDateTime= itemView.findViewById(R.id.order_date_time);
+            userShippingAddress= itemView.findViewById(R.id.order_address_city);
+            ShowOrderBtn= itemView.findViewById(R.id.show_all_products_btn);
         }
     }
-
-    private void RemoverOrder(String uID)
+    private void RemoveOrder(String uID)
     {
         ordersRef.child(uID).removeValue();
     }
