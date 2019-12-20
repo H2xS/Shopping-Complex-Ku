@@ -59,7 +59,7 @@ public class CartActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                txtTotalAmount.setText("Total Price ="+overTotalPrice);
+                txtTotalAmount.setText("Total Price = Rs"+String.valueOf(overTotalPrice));
                 Intent intent=new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
                 intent.putExtra("Total Price",String.valueOf(overTotalPrice));
                 startActivity(intent);
@@ -79,7 +79,8 @@ public class CartActivity extends AppCompatActivity
         FirebaseRecyclerOptions<Cart> options=
                 new FirebaseRecyclerOptions.Builder<Cart>()
                 .setQuery(cartListRef.child("User View")
-                .child(Prevalent.currentOnlineUser.getPhone()).child("Products"),Cart.class)
+                .child(Prevalent.currentOnlineUser.getPhone())
+                .child("Products"),Cart.class)
                 .build();
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter
                 =new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
@@ -87,7 +88,7 @@ public class CartActivity extends AppCompatActivity
             protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull final Cart model)
             {
                 holder.txtProductQuantity.setText("Quantity = "+model.getQuantity());
-                holder.txtProductPrice.setText("Price = "+model.getPrice());
+                holder.txtProductPrice.setText("Price "+model.getPrice()+ "Rs");
                 holder.txtProductName.setText(model.getPname());
 
                 int oneTypeProductTPrice=((Integer.valueOf(model.getPrice()))) * Integer.valueOf(model.getQuantity());
