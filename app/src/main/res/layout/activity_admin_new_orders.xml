@@ -27,9 +27,7 @@
         android:id="@+id/orders_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/r2"
-        >
-
+        android:layout_below="@+id/r2">
     </androidx.recyclerview.widget.RecyclerView>
 
 

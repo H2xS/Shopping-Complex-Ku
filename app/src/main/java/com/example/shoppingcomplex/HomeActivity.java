@@ -110,19 +110,19 @@ public class HomeActivity extends AppCompatActivity
         FirebaseRecyclerAdapter<Products, ProductViewHolder>adapter=
                 new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i, @NonNull final Products products)
+                    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull final Products model)
                     {
-                        productViewHolder.txtProductName.setText(products.getPname());
-                        productViewHolder.txtProductDescription.setText(products.getDescription());
-                        productViewHolder.txtProductPrice.setText("Price : "+products.getPrice()+" Rs");
-                        Picasso.get().load(products.getImage()).into(productViewHolder.imageView);
+                        holder.txtProductName.setText(model.getPname());
+                        holder.txtProductDescription.setText(model.getDescription());
+                        holder.txtProductPrice.setText("Price : "+model.getPrice()+" Rs");
+                        Picasso.get().load(model.getImage()).into(holder.imageView);
 
-                        productViewHolder.itemView.setOnClickListener(new View.OnClickListener(){
+                        holder.itemView.setOnClickListener(new View.OnClickListener(){
                             @Override
                             public void onClick(View view)
                             {
                                 Intent intent=new Intent(HomeActivity.this,ProductDetailsActivity.class);
-                                intent.putExtra("pid",products.getPid());
+                                intent.putExtra("pid",model.getPid());
                                 startActivity(intent);
                             }
 
@@ -194,8 +194,10 @@ public class HomeActivity extends AppCompatActivity
             startActivity(intent);
 
         }
-        else if(id==R.id.nav_orders)
+        else if(id==R.id.nav_search)
         {
+            Intent intent=new Intent(HomeActivity.this,SearchProductsActivity.class);
+            startActivity(intent);
 
         }
         else if(id==R.id.nav_categories)
