@@ -1,4 +1,4 @@
-package com.example.shoppingcomplex;
+package com.example.shoppingcomplex.Buyers;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.shoppingcomplex.Model.Cart;
 import com.example.shoppingcomplex.Prevalent.Prevalent;
+import com.example.shoppingcomplex.R;
 import com.example.shoppingcomplex.ViewHolder.CartViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -60,7 +61,7 @@ public class CartActivity extends AppCompatActivity
             public void onClick(View view)
             {
                 txtTotalAmount.setText("Total Price ="+overTotalPrice);
-                Intent intent=new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
+                Intent intent=new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
                 intent.putExtra("Total Price",String.valueOf(overTotalPrice));
                 startActivity(intent);
                 finish();
@@ -113,7 +114,7 @@ public class CartActivity extends AppCompatActivity
                             {
                                 if(i==0)
                                 {
-                                    Intent intent=new Intent(CartActivity.this,ProductDetailsActivity.class);
+                                    Intent intent=new Intent(CartActivity.this, ProductDetailsActivity.class);
                                     intent.putExtra("pid",model.getPid());
                                     startActivity(intent);
                                 }
@@ -132,7 +133,7 @@ public class CartActivity extends AppCompatActivity
                                                     {
                                                         Toast.makeText(CartActivity.this,"Item removed Successfully.",Toast.LENGTH_SHORT).show();
 
-                                                        Intent intent=new Intent(CartActivity.this,HomeActivity.class);
+                                                        Intent intent=new Intent(CartActivity.this, HomeActivity.class);
                                                         startActivity(intent);
 
                                                     }

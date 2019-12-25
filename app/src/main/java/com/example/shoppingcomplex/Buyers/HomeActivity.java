@@ -1,4 +1,4 @@
-package com.example.shoppingcomplex;
+package com.example.shoppingcomplex.Buyers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppingcomplex.Admin.AdminMaintainProductsActivity;
 import com.example.shoppingcomplex.Model.Products;
 import com.example.shoppingcomplex.Prevalent.Prevalent;
+import com.example.shoppingcomplex.R;
 import com.example.shoppingcomplex.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -68,7 +69,7 @@ public class HomeActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(HomeActivity.this,CartActivity.class);
+                Intent intent=new Intent(HomeActivity.this, CartActivity.class);
                 startActivity(intent);
             }
         });
@@ -111,7 +112,7 @@ public class HomeActivity extends AppCompatActivity
 
         FirebaseRecyclerOptions<Products> options =
                 new FirebaseRecyclerOptions.Builder<Products>()
-                .setQuery(ProductsRef, Products.class)
+                .setQuery(ProductsRef.orderByChild("productState").equalTo("Approved"), Products.class)
                 .build();
 
         FirebaseRecyclerAdapter<Products, ProductViewHolder>adapter=
@@ -138,7 +139,7 @@ public class HomeActivity extends AppCompatActivity
                                 }
                                 else
                                 {
-                                    Intent intent=new Intent(HomeActivity.this,ProductDetailsActivity.class);
+                                    Intent intent=new Intent(HomeActivity.this, ProductDetailsActivity.class);
                                     intent.putExtra("pid",model.getPid());
                                     startActivity(intent);
                                 }
@@ -216,7 +217,7 @@ public class HomeActivity extends AppCompatActivity
         }
         else if(id==R.id.nav_search)
         {
-            Intent intent=new Intent(HomeActivity.this,SearchProductsActivity.class);
+            Intent intent=new Intent(HomeActivity.this, SearchProductsActivity.class);
             startActivity(intent);
 
         }
@@ -226,14 +227,14 @@ public class HomeActivity extends AppCompatActivity
         }
         else if(id==R.id.nav_settings)
         {
-            Intent intent=new Intent(HomeActivity.this,SettingsActivity.class);
+            Intent intent=new Intent(HomeActivity.this, SettingsActivity.class);
             startActivity(intent);
         }
         else if(id==R.id.nav_logout)
         {
             Paper.book().destroy();
 
-            Intent intent=new Intent(HomeActivity.this,MainActivity.class);
+            Intent intent=new Intent(HomeActivity.this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();

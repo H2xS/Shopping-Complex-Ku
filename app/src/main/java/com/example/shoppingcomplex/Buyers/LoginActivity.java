@@ -1,4 +1,4 @@
-package com.example.shoppingcomplex;
+package com.example.shoppingcomplex.Buyers;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,9 +13,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shoppingcomplex.Admin.AdminCategoryActivity;
+import com.example.shoppingcomplex.Admin.AdminHomeActivity;
+import com.example.shoppingcomplex.Sellers.SellerProductCategoryActivity;
 import com.example.shoppingcomplex.Model.Users;
 import com.example.shoppingcomplex.Prevalent.Prevalent;
+import com.example.shoppingcomplex.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Intent intent=new Intent(LoginActivity.this,ResetPasswordActivity.class);
+                Intent intent=new Intent(LoginActivity.this, ResetPasswordActivity.class);
                 intent.putExtra("check","login");
                 startActivity(intent);
             }
@@ -149,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Welcome Admin, You are logged in Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
 
-                                Intent intent=new Intent(LoginActivity.this, AdminCategoryActivity.class);
+                                Intent intent=new Intent(LoginActivity.this, AdminHomeActivity.class);
                                 startActivity(intent);
                             }
                             else if (parentDbName.equals("Users"))

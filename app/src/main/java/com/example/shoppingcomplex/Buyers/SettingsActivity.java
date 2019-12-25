@@ -1,4 +1,4 @@
-package com.example.shoppingcomplex;
+package com.example.shoppingcomplex.Buyers;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shoppingcomplex.Prevalent.Prevalent;
+import com.example.shoppingcomplex.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -80,7 +81,7 @@ public class SettingsActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Intent intent=new Intent(SettingsActivity.this,ResetPasswordActivity.class);
+                Intent intent=new Intent(SettingsActivity.this, ResetPasswordActivity.class);
                 intent.putExtra("check","settings");
                 startActivity(intent);
             }
@@ -126,7 +127,7 @@ public class SettingsActivity extends AppCompatActivity
         userMap.put("phoneOrder", userPhoneEditText.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
 
-        startActivity(new Intent(SettingsActivity.this,HomeActivity.class));
+        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
         Toast.makeText(SettingsActivity.this, "Profile Info update successfully...", Toast.LENGTH_SHORT).show();
         finish();
     }

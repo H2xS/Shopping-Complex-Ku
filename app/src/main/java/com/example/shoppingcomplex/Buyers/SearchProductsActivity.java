@@ -1,14 +1,12 @@
-package com.example.shoppingcomplex;
+package com.example.shoppingcomplex.Buyers;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +15,7 @@ import android.widget.EditText;
 
 
 import com.example.shoppingcomplex.Model.Products;
+import com.example.shoppingcomplex.R;
 import com.example.shoppingcomplex.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -81,7 +80,7 @@ public class SearchProductsActivity extends AppCompatActivity
                             @Override
                             public void onClick(View view)
                             {
-                                Intent intent=new Intent(SearchProductsActivity.this,ProductDetailsActivity.class);
+                                Intent intent=new Intent(SearchProductsActivity.this, ProductDetailsActivity.class);
                                 intent.putExtra("pid",model.getPid());
                                 startActivity(intent);
                             }

@@ -10,20 +10,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppingcomplex.Interface.ItemClickListner;
 import com.example.shoppingcomplex.R;
 
-public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+
+
+public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {
-    public TextView txtProductName,txtProductDescription,txtProductPrice;
+    public TextView txtProductName,txtProductDescription,txtProductPrice,txtProductStatus;
     public ImageView imageView;
     public ItemClickListner listner;
 
-    public ProductViewHolder(@NonNull View itemView)
+    public ItemViewHolder(@NonNull View itemView)
     {
         super(itemView);
 
-        imageView=(ImageView)itemView.findViewById(R.id.product_image);
-        txtProductName=(TextView) itemView.findViewById(R.id.product_name);
-        txtProductDescription=(TextView) itemView.findViewById(R.id.product_description);
-        txtProductPrice=(TextView) itemView.findViewById(R.id.product_price);
+        imageView=(ImageView)itemView.findViewById(R.id.product_seller_image);
+        txtProductName=(TextView) itemView.findViewById(R.id.seller_product_name);
+        txtProductDescription=(TextView) itemView.findViewById(R.id.product_seller_description);
+        txtProductPrice=(TextView) itemView.findViewById(R.id.product_seller_price);
+        txtProductStatus=(TextView) itemView.findViewById(R.id.seller_product_state);
     }
 
     public void setItemClickListner(ItemClickListner listner)
@@ -38,3 +41,4 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
 
     }
 }
+
