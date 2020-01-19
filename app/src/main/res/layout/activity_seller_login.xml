@@ -62,7 +62,7 @@
         android:layout_marginTop="20dp"
         android:layout_below="@+id/seller_login_password"
         android:background="@android:color/holo_blue_light"
-        android:text="Sign Im"
+        android:text="Sign In"
         android:textAllCaps="false"
         android:textSize="18dp"
         android:textColor="@android:color/white"
